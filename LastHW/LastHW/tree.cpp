@@ -9,6 +9,11 @@ struct WordNode {
 	WordNode *m_left;
 	WordNode *m_right;
 	// You may add additional data members and member functions in WordNode
+	WordNode(ItemType dataValue) {
+		m_data = dataValue;
+		m_left = nullptr;
+		m_right = nullptr;
+	}
 };
 
 class WordTree {
@@ -44,3 +49,55 @@ public:
 	// in the tree.
 	~WordTree();
 };
+
+
+void WordTree::add(ItemType v) {
+	WordNode* b = root;
+
+	// Base case: tree is empty
+	if (b==nullptr ) {
+		b->m_data = v;
+			return;
+	}
+
+	// Otherwise, find its proper position
+	while (true) {
+		// Case: Data is less than current node
+		if (v < b->m_data) {
+			// If there's already a node left...
+			if (b->m_left!=nullptr) {
+				// Then continue down the tree
+				b = b->m_left;
+					
+			}		// Otherwise, no node to left, so insert:
+			else {
+				b->m_left = new WordNode(v);
+				return;
+			}
+
+			// Case: Data is greater than / equal to node
+		}
+		else {
+			if (b->m_right!=nullptr) {
+				b = b->m_right;
+			}
+			else {
+				b->m_right = new WordNode(v);
+				return;
+			}
+		}
+	}
+}
+
+
+
+
+
+
+
+
+
+
+int main() {
+
+}
